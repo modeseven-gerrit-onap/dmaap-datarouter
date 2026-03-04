@@ -6,27 +6,28 @@ Delivery
 
 Below is a diagram of the DMaaP Data Router project docker containers and the connections between them.
 
-.. blockdiag::
+.. mermaid::
 
+   graph TD
+       MARIADB --> DR-PROV
+       DR-PROV --> DR-NODE
 
-   blockdiag layers {
-   orientation = portrait
-   MARIADB -> DR-PROV;
-   DR-PROV -> DR-NODE;
-   group l1 {
-	color = blue;
-	label = "dr-prov Container";
-	DR-PROV;
-	}
-   group l2 {
-	color = yellow;
-	label = "dr-node Container";
-	DR-NODE;
-	}
-   group l3 {
-	color = orange;
-	label = "MariaDb Container";
-	MARIADB;
-	}
+       subgraph "dr-prov Container"
+           DR-PROV
+       end
 
-   }
+       subgraph "dr-node Container"
+           DR-NODE
+       end
+
+       subgraph "MariaDb Container"
+           MARIADB
+       end
+
+       classDef blue fill:#33f,stroke:#333,color:#fff
+       classDef yellow fill:#ff0,stroke:#333,color:#000
+       classDef orange fill:#f90,stroke:#333,color:#000
+
+       class DR-PROV blue
+       class DR-NODE yellow
+       class MARIADB orange
